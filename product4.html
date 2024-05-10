@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Pineapple Juice</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        .content {
+            width: 60%;
+            float: right;
+            margin-top: 20px;
+        }
+
+        .title {
+            font-size: 40px;
+            font-weight: bold;
+        }
+
+        .recipe-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .recipe-list li {
+            margin-bottom: 5px;
+        }
+
+        .buy-section {
+            margin-top: 20px;
+            font-weight: bold;
+            padding: 20px;
+            position: relative;
+            border: none;
+        }
+
+        .buy-section::before,
+        .buy-section::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 5px;
+            background: repeating-linear-gradient(to right, red, red 10px, blue 10px, blue 20px);
+            top: 0;
+            left: 0;
+        }
+
+        .buy-section::after {
+            top: 100%;
+        }
+
+        .buy-button {
+            font-size: 1em;
+            border-radius: .3em;
+            height: 2.75em;
+            line-height: 2.5em;
+            text-transform: uppercase;
+            padding: 0 1em;
+            background-image: linear-gradient(160deg, #a54e07, #b47e11, #fef1a2, #bc881b, #a54e07);
+            border: 1px solid #a55d07;
+            color: rgb(120, 50, 5);
+            text-shadow: 0 2px 2px rgba(250, 227, 133, 1);
+            cursor: pointer;
+            transition: all .2s ease-in-out;
+            background-size: 100% 100%;
+            background-position: center;
+        }
+
+        .buy-button:focus,
+        .buy-button:hover {
+            background-size: 150% 150%;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23), inset 0 -2px 5px 1px #b17d10, inset 0 -1px 1px 3px rgba(250, 227, 133, 1);
+            border: 1px solid rgba(165, 93, 7, .6);
+            color: rgba(120, 50, 5, .8);
+        }
+
+        .buy-button:active {
+            box-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 3px 6px rgba(110, 80, 20, .4), inset 0 -2px 5px 1px #b17d10, inset 0 -1px 1px 3px rgba(250, 227, 133, 1);
+        }
+
+        .delivery-info {
+            font-size: 14px;
+            color: green;
+        }
+
+        .rating-label {
+            display: flex;
+            align-items: center;
+            margin-right: 5px;
+            margin-top: -5px;
+        }
+
+        .rating-select {
+            margin-right: 10px;
+        }
+
+        .comments-textarea {
+            width: 100%;
+        }
+
+        .submit-button {
+            padding: 5px 10px;
+            background-color: blue;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .image-container {
+            width: 30%;
+            float: left;
+            margin-right: 10%;
+            margin-top: 20px;
+        }
+
+        .image {
+            width: 100%;
+        }
+
+        .popup-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            width: 50%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .input-money {
+            width: 100px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content container">
+        <p class="title">𝙋𝙞𝙣𝙚𝙖𝙥𝙥𝙡𝙚 𝙅𝙪𝙞𝙘𝙚</p>
+        <p>This is a brief description of your product. Add more details about its features, benefits, and why it's a great choice for customers. Make it engaging and informative.</p>
+        <h1><b>RECIPE</b></h1>
+        <ul class="recipe-list">
+            <li>FRESH PINEAPPLE</li>
+            <li>GRIND THE PINEAPPLE EXTRACT</li>
+        </ul>
+
+        <div class="buy-section">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required class="form-control">
+            <br>
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required class="form-control">
+            <br>
+            <label for="phoneNumber">Phone Number:</label> 
+            <input type="text" id="phoneNumber" name="phoneNumber" required class="form-control">
+            <br>
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" min="1" value="1" class="form-control">
+            <br>
+            <label for="address">Address:</label>
+            <textarea id="address" name="address" rows="4" class="address-textarea form-control"></textarea>
+            <br>
+            <button class="buy-button btn btn-primary" onclick="showPopup()">Buy</button>
+
+
+            <br>
+
+            <span class="delivery-info">FAST DELIVERY | FRESH FOOD | NO DEFECTS </span>
+
+            <br>
+
+            <label for="starRating" class="rating-label">⭐ Rating:</label>
+            <select id="starRating" name="starRating" class="rating-select form-select">
+                <option value="5">5 Stars</option>
+                <option value="4">4 Stars</option>
+                <option value="3">3 Stars</option>
+                <option value="2">2 Stars</option>
+                <option value="1">1 Star</option>
+            </select>
+
+            <br>
+
+            <label for="comments">Comments:</label>
+            <textarea id="comments" name="comments" rows="4" class="comments-textarea form-control"></textarea>
+
+
+            <button class="submit-button btn btn-primary" onclick="submitComments()">Submit Comments</button>
+        </div>
+    </div>
+    <div class="image-container">
+
+        <a href="product4.html">
+            <img src="images/pngegg (1).png" alt="Product Image" class="image">
+        </a>
+    </div>
+
+
+    <div class="popup-container" id="popup">
+        <span class="close-button" onclick="hidePopup()">&times;</span>
+        <div class="popup-content">
+            <p>Enter Amount</p>
+            <input type="number" id="paymentAmount" class="input-money form-control">
+            <label for="paymentMethod">Select payment method:</label>
+            <select id="paymentMethod" name="paymentMethod" class="form-select">
+                <option value="card">Credit/Debit Card</option>
+                <option value="gcash">GCash</option>
+                <option value="paypal">PayPal</option>
+                <option value="bank_transfer">Bank Transfer</option>
+            </select>
+            <button class="submit-button btn btn-primary" onclick="checkPayment()">OK</button>
+        </div>
+    </div>
+
+
+    <script>
+        function showPopup() {
+            document.getElementById('popup').style.display = 'flex';
+        }
+
+        function hidePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+        function generateRandomProductId() {
+      
+      return Math.floor(Math.random() * 9000) + 1000;
+  }
+
+  function checkPayment() {
+    var quantity = parseInt(document.getElementById("quantity").value);
+    var paymentAmount = parseInt(document.getElementById("paymentAmount").value);
+    var name = document.getElementById("name").value;
+    var age = document.getElementById("age").value;
+    var phoneNumber = document.getElementById("phoneNumber").value; 
+    var address = document.getElementById("address").value;
+    var paymentMethod = document.getElementById("paymentMethod").value;
+
+    var productPrice = 15;
+
+    if (isNaN(paymentAmount) || paymentAmount < productPrice) {
+        alert("Insufficient payment amount. Please enter at least " + productPrice + " pesos.");
+    } else if (name.trim() === '' || age.trim() === '' || phoneNumber.trim() === '' || address.trim() === '') { 
+        alert("Please enter your name, age, phone number, and address."); 
+    } else {
+        var productName = "Pineapple Juice";
+        var productImage = "images/pngegg (1).png";
+        var productId = generateRandomProductId(); 
+        var queryString = "?productName=" + productName + "&name=" + name + "&age=" + age + "&phoneNumber=" + phoneNumber + "&quantity=" + quantity + "&paymentAmount=" + paymentAmount + "&productImage=" + productImage + "&address=" + address + "&productId=" + productId; // Updated
+        window.location.href = "purcahsezone.html" + queryString;
+    }
+}
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
